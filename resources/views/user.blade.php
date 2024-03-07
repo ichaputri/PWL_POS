@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Data Kategori Barang</title>
+    <title>Data User</title>
 </head>
 <body>
-    <h1>Data Kategori Barang</h1>
+    <h1>Data User</h1>
     <table border = "1" cellpadding="2" cellspacing="0">
         <tr>
             <th>ID</th>
