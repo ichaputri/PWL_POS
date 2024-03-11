@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Psy\Readline\Hoa\Console;
 
 class UserController extends Controller
 {
@@ -133,8 +134,10 @@ class UserController extends Controller
         // $user->wasChanged('nama'); // false
         // dd($user->wasChanged(['nama', 'username'])); // true
 
-        $user = UserModel::all();
-        return view('user', ['data' => $user]);
+        $user = UserModel::with('level')->get();
+        return view('user',['data' => $user]);
+        // dd($user);
+
         
     }
 
