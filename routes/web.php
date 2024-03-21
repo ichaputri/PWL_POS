@@ -32,4 +32,14 @@ Route:: get('/user/ubah/{id}', [UserController::class, 'ubah']);
 
 Route::put('/user/ubah_simpan/{id}', [UserController::class,  'ubah_simpan']);
 
-Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);   
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus']); 
+
+
+// Kategori
+Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+Route::get('/kategori/create', [KategoriController::class, 'create']);
+// kategori edit
+Route::get('/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
+Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
+Route::delete('/kategori/{kategori}', [App\Http\Controllers\KategoriController::class, 'destroy'])->name('kategori.destroy');
+
