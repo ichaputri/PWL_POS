@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('template::page')
 
 {{-- Extend and customize the browser title --}}
 
 @section('title')
-    {{ config('adminlte.title') }}
+    {{ config('template.title') }}
     @hasSection('subtitle') | @yield('subtitle') @endif
 @stop
 
