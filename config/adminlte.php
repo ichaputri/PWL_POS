@@ -320,9 +320,13 @@ return [
         ],
         [
             'text' => 'Manage Kategori',
-            ['text' => 'kategori'],
             'url' => '/kategori', // Mengarahkan ke halaman kategori
             'icon' => 'fas fa-list',
+        ],
+        [
+            'text' => 'M_User',
+            'url' => '/m_user',
+            'icon' => 'fa fa-users',
         ],
     ],
 
