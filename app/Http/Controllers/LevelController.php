@@ -31,6 +31,18 @@ class LevelController extends Controller
 
     public function tambah_simpan(Request $request)
     {
+        $validated = $request->validate([
+            'level_kode' => 'required|min:3|max:10|unique:levels,level_kode',
+            'level_nama' => 'required|max:50',
+        ], [
+            'level_kode.required' => 'Kode level harus diisi.',
+            'level_kode.min' => 'Kode level minimal terdiri dari 3 karakter.',
+            'level_kode.max' => 'Kode level maksimal terdiri dari 10 karakter.',
+            'level_kode.unique' => 'Kode level sudah digunakan.',
+            'level_nama.required' => 'Nama level harus diisi.',
+            'level_nama.max' => 'Nama level maksimal terdiri dari 50 karakter.',
+        ]);
+        
         LevelModel::create([
             'level_kode'=>$request->level_kode,
             'level_nama'=>$request->level_nama,

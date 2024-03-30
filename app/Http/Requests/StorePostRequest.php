@@ -27,4 +27,13 @@ class StorePostRequest extends FormRequest
             'kategori_nama' => 'required',
         ];
     }
+    public function store(StorePostRequest $request): RedirectResponse
+    {
+        $validated = $request->validated();
+
+        $validated = $request->safe()->only(['kategori_kode', 'kategori_nama']);
+        $validated = $request->safe()->except(['kategori_kode', 'kategori_nama']);
+
+        return redirect('/kategori');
+    }
 }
