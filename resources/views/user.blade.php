@@ -73,6 +73,6 @@
                     </tr>
         @endforeach
             </table>
-    </table>
+    {{-- </table> --}}
 </body>
 </html>

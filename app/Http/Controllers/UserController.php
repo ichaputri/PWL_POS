@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -9,7 +10,7 @@ use Psy\Readline\Hoa\Console;
 
 class UserController extends Controller
 {
-    public function index() {
+    public function index(UserDataTable $dataTable) {
         // // tambah data user dengan Eloquent Model
         // $data = [
         //     // 'username' => 'customer-1',
@@ -134,9 +135,11 @@ class UserController extends Controller
         // $user->wasChanged('nama'); // false
         // dd($user->wasChanged(['nama', 'username'])); // true
 
-        $user = UserModel::with('level')->get();
-        return view('user',['data' => $user]);
+        // $user = UserModel::with('level')->get();
+        // return view('user',['data' => $user]);
         // dd($user);
+
+        return $dataTable->render('indexUser');
 
         
     }

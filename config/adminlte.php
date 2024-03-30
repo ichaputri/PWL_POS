@@ -157,7 +157,7 @@ return [
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
-    'layout_dark_mode' => true,
+    'layout_dark_mode' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -297,19 +297,33 @@ return [
         // Navbar items:
         [
             'text' => 'Dashboard',
-            'url'=>'/',
+            'url' => '/',
             'icon' => 'fa fa-home',
+
         ],
         [
-        'text' => 'User',
-        'url' => '/user', // Mengarahkan ke halaman user
-        'icon' => 'fa fa-users', 
+            'text' => 'Manage  Users',
+            'icon' => 'fa fa-users',
+            'submenu' => [
+                [
+                'text' => 'Level',
+                'url' => '/level',
+                'icon' => 'fa fa-list-ol',
+                ],
+                [
+                'text' => 'User',
+                'url' => '/user',
+                'icon' => 'fa fa-user', 
+                ]
+
+            ],
         ],
-         [
-        'text' => 'Manage Kategori',
-        'url' => '/kategori', // Mengarahkan ke halaman kategori
-        'icon' => 'fas fa-list', 
-    ],
+        [
+            'text' => 'Manage Kategori',
+            ['text' => 'kategori'],
+            'url' => '/kategori', // Mengarahkan ke halaman kategori
+            'icon' => 'fas fa-list',
+        ],
     ],
 
     /*

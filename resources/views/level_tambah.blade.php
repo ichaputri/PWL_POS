@@ -6,7 +6,7 @@
 {{-- Content body: main page content --}}
 @section('content')
     <div class="container">
-        <div class="card card-info">
+        <div class="card card-warning">
             <div class="card-header">
                 <h3 class="card-title">Tambah Data Level</h3>
             </div>
@@ -24,7 +24,8 @@
                                 placeholder="Masukkan Nama Level">
                         </div>
                         <div class="form-group text-right">
-                            <input type="submit" class="btn btn-primary" value="Simpan">
+                            <a href="/level" class="btn btn-danger">Kembali</a>
+                            <input type="submit" class="btn btn-info" value="Simpan">
                         </div>
                     </div>
                 </form>

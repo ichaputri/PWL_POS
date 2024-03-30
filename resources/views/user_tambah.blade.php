@@ -6,7 +6,7 @@
 {{-- Content body: main page content --}}
 @section('content')
     <div class="container">
-        <div class="card card-primary">
+        <div class="card card-warning">
             <div class="card-header">
                 <h3 class="card-title">Tambah Data User</h3>
             </div>
@@ -37,8 +37,9 @@
                         <input type="number" name="level_id" class="form-control" id="level_id"
                             placeholder="Masukkan ID Level">
                     </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-success" value="Simpan">
+                    <div class="form-group text-right">
+                        <a href="/user" class="btn btn-danger">Kembali</a>
+                        <input type="submit" class="btn btn-info" value="Simpan">
                     </div>
             </form>
         </div>

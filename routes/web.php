@@ -26,11 +26,11 @@ Route::get('/level/tambah', [LevelController::class, 'tambah']);
 Route::post('/level/tambah_simpan', [levelController::class, 'tambah_simpan']);
 // user
 Route::get('/user',[UserController::class, 'index']);
-Route::get('/user/tambah', [UserController::class, 'tambah']);
+Route::get('/user/tambah', [UserController::class, 'tambah']); 
 Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
-Route:: get('/user/ubah/{id}', [UserController::class, 'ubah']);
+Route:: get('/user/ubah/{id}', [UserController::class, 'ubah'])->name('user.ubah');
 Route::put('/user/ubah_simpan/{id}', [UserController::class,  'ubah_simpan']);
-Route::get('/user/hapus/{id}', [UserController::class, 'hapus']); 
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus'])->name('user.hapus'); 
 // Kategori
 Route::get('/kategori',[KategoriController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
