@@ -39,10 +39,10 @@ class KategoriController extends Controller
         return view('kategori.create');
     }
 
-    public function store(StorePostRequest $request): RedirectResponse{
+    public function store(Request $request): RedirectResponse{
         $validated = $request->validate([
-            'kategori_kode' =>'bail|required',
-            'kategori_nama' => 'required',
+            'kodeKategori' =>'bail|required|min:3|unique:posts|string|max:10',
+            'namaKategori' =>'bail|required|string|max:50',
         ]);
         return redirect('/kategori');
     }
