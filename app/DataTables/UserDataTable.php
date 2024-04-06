@@ -24,10 +24,10 @@ class UserDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($user) {
-                return '<a href="' . route('user.ubah', $user->user_id) . '" class="btn btn-primary mr-2">
+                return '<a href="' . route('/user/edit', ['id' => $user->user_id]) . '" class="btn btn-primary mr-2">
                         <i class="fa fa-pencil-alt" style="color: white; font-size: 12px;"></i>
                         </a>' .
-                    '<a href="' . route('user.hapus', $user->user_id) . '" class="btn btn-danger"
+                    '<a href="' . route('/user/delete', ['id' => $user->user_id]) . '" class="btn btn-danger"
                         onclick="return confirm(\'Are you sure want to delete?\')">
                         <i class="fa fa-trash" style="color: white; font-size: 12px;"></i>
                         </a>';
