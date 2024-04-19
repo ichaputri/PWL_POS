@@ -6,7 +6,7 @@ use App\Models\KategoriModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button; 
+use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
@@ -22,16 +22,9 @@ class KategoriDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->setRowId('id')
-            ->addColumn('action', function ($kategori) {
-                return '<a href="' . route('kategori.edit', $kategori->kategori_id) . '" class="btn btn-sm btn-warning edit" data-toggle="tooltip" data-placement="top" title="Edit Kategori"><i class="fas fa-edit"></i></a>
-                <form action="' . route('kategori.destroy', $kategori->kategori_id) . '" method="POST" class="d-inline">
-                    ' . csrf_field() . '
-                    ' . method_field('DELETE') . '
-                    <button type="submit" class="btn btn-sm btn-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus Kategori" onclick="return confirm(\'Apakah Anda yakin ingin menghapus kategori ini?\')"><i class="fas fa-trash"></i></button>
-                </form>';
-            });
-    }       
+            ->setRowId('id');
+    }
+
 
     /**
      * Get the query source of dataTable.
@@ -74,11 +67,11 @@ class KategoriDataTable extends DataTable
             Column::make('kategori_nama'),
             Column::make('created_at'),
             Column::make('updated_at'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(100)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(100)
+            //     ->addClass('text-center'),
         ];
     }
 
