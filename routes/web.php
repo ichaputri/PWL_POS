@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\POSController;
 use App\Http\Controllers\StockController;
@@ -20,6 +23,28 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Login
+// Route untuk login, register, proses login, dan logout
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('proses_register', [AuthController::class, 'proses_register'])->name('proses_register');
+
+// Route dengan penggunaan middleware
+Route::group(['middleware' => ['auth']], function () {
+    // Middleware untuk cek kondisi login admin
+    Route::group(['middleware' => ['cek_login:1']], function () {
+        Route::resource('admin', AdminController::class);
+    });
+
+    // Middleware untuk cek kondisi login manager
+    Route::group(['middleware' => ['cek_login:2']], function () {
+        Route::resource('manager', ManagerController::class);
+    });
+});
+
 
 // M_user
 Route::get('/', [WelcomeController::class, 'index']);
