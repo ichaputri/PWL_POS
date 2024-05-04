@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\TransaksiController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->name('register');
+Route::post('/register1', App\Http\Controllers\Api\RegisterController::class)->name('register1');
 Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('login');
 Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -45,6 +47,7 @@ Route::put('users/{user}', [UserController::class, 'update']);
 Route::delete('users/{user}', [UserController::class, 'destroy']);
 
 // Route kategori
+
 Route::get('kategori', [KategoriController::class, 'index']);
 Route::post('kategori', [KategoriController::class, 'store']);
 Route::get('kategori/{kategori}', [KategoriController::class, 'show']);
@@ -57,5 +60,12 @@ Route::post('barang', [BarangController::class, 'store']);
 Route::get('barang/{barang}', [BarangController::class, 'show']);
 Route::put('barang/{barang}', [BarangController::class, 'update']);
 Route::delete('barang/{barang}', [BarangController::class, 'destroy']);
+
+// Route Transaksi Penjualan
+Route::get('penjualan', [TransaksiController::class, 'index']);
+Route::post('penjualan', [TransaksiController::class, 'store']);
+Route::get('penjualan/{penjualan}', [TransaksiController::class, 'show']);
+Route::put('penjualan/{penjualan}', [TransaksiController::class, 'update']);
+Route::delete('penjualan/{penjualan}', [TransaksiController::class, 'destroy']);
 
 
