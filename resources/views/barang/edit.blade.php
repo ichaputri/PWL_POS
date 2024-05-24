@@ -20,7 +20,7 @@
                 </div>
                 <a href="{{ url('barang') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
             @else
-                <form method="POST" action="{{ url('/barang/' . $barang->barang_id) }}" class="form-horizontal">
+                <form method="POST" action="{{ url('/barang/' . $barang->barang_id) }}" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
                     {!! method_field('PUT') !!} <!-- tambahkan baris ini untuk proses edit yang butuh method PUT -->
 
@@ -71,21 +71,29 @@
                             <small class="alert alert-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="image" class="col-sm-2 col-form-label">Upload Gambar</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="image" id="image"
+                                class="form-control @error('image') is-invalid @enderror">
+                            @error('image')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                            @if ($barang->image)
+                                <img src="{{ asset($barang->image) }}" alt="Current Image" class="img-thumbnail mt-2" width="30%">
+                            @endif
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label"></label>
                         <div class="col-11">
                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button> <a
-                                class="btn btn-sm btn-default ml-1" href="{{ url('barang') }}">Kembali</a>
+                                class="btn btn-sm btn-danger ml-1" href="{{ url('barang') }}">Kembali</a>
                         </div>
                     </div>
+
                 </form>
             @endempty
         </div>
     </div>
 @endsection
-
-@push('css')
-@endpush
-
-@push('js')
-@endpush

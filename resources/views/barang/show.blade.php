@@ -13,48 +13,25 @@
                     Data yang Anda cari tidak ditemukan.
                 </div>
             @else
-                <table class="table table-bordered table-striped table-hover table-sm">
-                    <tr>
-                        <th>ID</th>
-                        <td>{{ $barang->barang_id }}</td>
-                    </tr>
-                    <tr>
-                        <th>Barang Kode</th>
-                        <td>{{ $barang->barang_kode }}</td>
-                    </tr>
-                    <tr>
-                        <th>Kategori</th>
-                        <td>{{ $barang->kategori->kategori_nama }}</td>
-                    </tr>
-                    <tr>
-                        <th>Barang Nama</th>
-                        <td>{{ $barang->barang_nama }}</td>
-                    </tr>
-                    <tr>
-                        <th>Harga Beli</th>
-                        <td>{{ $barang->harga_beli }}</td>
-                    </tr>
-                    <tr>
-                        <th>Harga Jual</th>
-                        <td>{{ $barang->harga_jual }}</td>
-                    </tr>
-                    <tr>
-                        <th>Created At</th>
-                        <td>{{ $barang->created_at }}</td>
-                    </tr>
-                    <tr>
-                        <th>Updated At</th>
-                        <td>{{ $barang->updated_at }}</td>
-                    </tr>
-                </table>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>ID:</strong> {{ $barang->barang_id }}</li>
+                            <li class="list-group-item"><strong>Barang Kode:</strong> {{ $barang->barang_kode }}</li>
+                            <li class="list-group-item"><strong>Kategori:</strong> {{ $barang->kategori->kategori_nama }}</li>
+                            <li class="list-group-item"><strong>Barang Nama:</strong> {{ $barang->barang_nama }}</li>
+                            <li class="list-group-item"><strong>Harga Beli:</strong> {{ $barang->harga_beli }}</li>
+                            <li class="list-group-item"><strong>Harga Jual:</strong> {{ $barang->harga_jual }}</li>
+                            <li class="list-group-item"><strong>Created At:</strong> {{ $barang->created_at }}</li>
+                            <li class="list-group-item"><strong>Updated At:</strong> {{ $barang->updated_at }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="{{ $barang->image }}" alt="Gambar Barang" width="45%">
+                    </div>
+                </div>
             @endempty
-            <a href="{{ url('barang') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+            <a href="{{ url('barang') }}" class="btn btn-sm btn-danger mt-2">Kembali</a>
         </div>
     </div>
 @endsection
-
-@push('css')
-@endpush
-
-@push('js')
-@endpush

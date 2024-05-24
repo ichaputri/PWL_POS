@@ -35,6 +35,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Gambar Profile</th>
                         <th>Username</th>
                         <th>Nama</th>
                         <th>Level Pengguna</th>
@@ -58,9 +59,9 @@
                     "url": "{{ url('user/list') }}",
                     "dataType": "json",
                     "type": "POST",
-                    "data": function (d) {
+                    "data": function(d) {
                         d.level_id = $('#level_id').val();
-                }
+                    }
                 },
                 columns: [{
                     data: "DT_RowIndex", // nomor urut dari laravel datatable addIndexColumn()
@@ -68,29 +69,42 @@
                     orderable: false,
                     searchable: false
                 }, {
+                    data: "image",
+                    className: "text-center",
+                    orderable: false,
+                    searchable: false,
+                    render: function(data, type, row) {
+                        if (data) {
+                            return '<img src="' + data +
+                                '" alt="Image" class="img-thumbnail" width="100">';
+                        } else {
+                            return '<img src="{{ asset('gambar/default-avatar.jpg') }}" alt="Default Avatar" class="img-thumbnail" width="100">';
+                        }
+                    }
+                }, {
                     data: "username",
-                    className: "",
+                    className: "text-center",
                     orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                 }, {
                     data: "nama",
-                    className: "",
+                    className: "text-center",
                     orderable: true, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: true // searchable: true, jika ingin kolom ini bisa dicari
                 }, {
                     data: "level.level_nama",
-                    className: "",
+                    className: "text-center",
                     orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: false // searchable: true, jika ingin kolom ini bisa dicari
                 }, {
                     data: "aksi",
-                    className: "",
+                    className: "text-center",
                     orderable: false, // orderable: true, jika ingin kolom ini bisa diurutkan
                     searchable: false // searchable: true, jika ingin kolom ini bisa dicari
                 }]
             });
             $('#level_id').on('change', function() {
-                 dataUser.ajax.reload();
+                dataUser.ajax.reload();
             });
         });
     </script>

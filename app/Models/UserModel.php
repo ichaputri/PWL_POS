@@ -30,10 +30,10 @@ class UserModel extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
     }
-    protected function image(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($image) => url('/storage/post' . $image),
-        );
-    }
+    // protected function image(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($image) => url('/storage/post' . $image),
+    //     );
+    // }
 }

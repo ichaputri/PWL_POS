@@ -27,10 +27,10 @@ class BarangModel extends Model
         return $this->belongsTo(KategoriModel::class, 'kategori_id', 'kategori_id');
     }
 
-    protected function image(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($image) => url('/storage/posts/' . $image),
-        );
-    }
+    // protected function image(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($image) => url('/storage/posts/' . $image),
+    //     );
+    // }
 }

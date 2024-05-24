@@ -38,6 +38,7 @@
                         <th>Barang Nama</th>
                         <th>Harga Beli</th>
                         <th>Harga Jual</th>
+                        <th>Gambar Barang</th>
                         {{-- <th>Created At</th>
                         <th>Updated At</th> --}}
                         <th>Aksi</th>
@@ -60,12 +61,11 @@
                     "url": "{{ url('barang/list') }}",
                     "dataType": "json",
                     "type": "POST",
-                    "data": function (d) {
+                    "data": function(d) {
                         d.kategori_id = $('#kategori_id').val();
                     }
                 },
-                columns: [
-                    {
+                columns: [{
                         data: "DT_RowIndex",
                         className: "text-center",
                         orderable: false,
@@ -94,6 +94,15 @@
                         className: "",
                         orderable: true,
                         searchable: true
+                    },
+                    {
+                        data: "image",
+                        className: "",
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row) {
+                            return '<img src="' + data + '" alt="Image" class="img-thumbnail" width="100">';
+                        }
                     },
                     {
                         data: "aksi",

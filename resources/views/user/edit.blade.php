@@ -14,9 +14,9 @@
                 </div>
                 <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
             @else
-                <form method="POST" action="{{ url('/user/' . $user->user_id) }}" class="form-horizontal">
+                <form method="POST" action="{{ url('/user/' . $user->user_id) }}" class="form-horizontal" enctype="multipart/form-data">
                     @csrf
-                    {!! method_field('PUT') !!} <!-- tambahkan baris ini untuk proses edit yang butuh method PUT -->
+                    @method('PUT') <!-- tambahkan baris ini untuk proses edit yang butuh method PUT -->
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Level</label>
                         <div class="col-11">
@@ -65,10 +65,24 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="image" class="col-1 control-label col-form-label">Foto Pengguna</label>
+                        <div class="col-11">
+                            <input type="file" class="form-control" id="image" name="image"
+                                value="{{ old('image', $user->image) }}" required>
+                            @error('image')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                            <!-- Menampilkan gambar yang lama -->
+                            @if ($user->image)
+                                <img src="{{ asset($user->image) }}" alt="Current Image" class="img-thumbnail mt-2" width="30%">
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-1 control-label col-form-label"></label>
                         <div class="col-11">
                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                            <a class="btn btn-sm btn-default ml-1" href="{{ url('user') }}">Kembali</a>
+                            <a class="btn btn-sm btn-danger ml-1" href="{{ url('user') }}">Kembali</a>
                         </div>
                     </div>
                 </form>
@@ -77,8 +91,3 @@
     </div>
 @endsection
 
-@push('css')
-@endpush
-
-@push('js')
-@endpush

@@ -7,6 +7,7 @@ use App\Models\LevelModel;
 use App\DataTables\UserDataTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -32,7 +33,7 @@ class UserController extends Controller
 
     public function list(Request $request)
     {
-        $users = UserModel::select('user_id', 'username', 'nama', 'level_id')->with('level');
+        $users = UserModel::select('user_id', 'username', 'nama', 'level_id', 'image')->with('level');
 
         //Filter data user berdasarkan level_id
         if ($request->level_id) {
@@ -79,13 +80,22 @@ class UserController extends Controller
             'nama' => 'required|string|max:100',
             'password' => 'required|min:5',
             'level_id' => 'required|integer',
+            'image' => 'required|file|image|max:500',
         ]);
+
+        // Handle image upload
+        $namaAsli = $request->image->getClientOriginalName();
+        $namaFileBaru = 'web-' . time() . "." . $namaAsli;
+        $path = $request->image->move('gbrStarterCode', $namaFileBaru);
+        $path = str_replace("\\", "//", $path);
+        $imagePath = asset('gbrStarterCode/' . $namaFileBaru);
 
         UserModel::create([
             'username' => $request->username,
             'nama' => $request->nama,
             'password' => bcrypt($request->password),
-            'level_id' => $request->level_id
+            'level_id' => $request->level_id,
+            'image' => $imagePath
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil disimpan');
@@ -141,31 +151,49 @@ class UserController extends Controller
             'username' => 'required|string|min:3|unique:m_user,username,' . $id . ',user_id',
             'nama' => 'required|string|max:100', // nama harus diisi, berupa string, dan maksimal 100 karakter
             'password' => 'nullable|min:5', // password bisa diisi (minimal 5 karakter) dan bisa tidak diisi
-            'level_id' => 'required|integer' // level_id harus diisi dan berupa angka
+            'level_id' => 'required|integer', // level_id harus diisi dan berupa angka
+            'image' => 'required|file|image|max:500',
+
         ]);
+
+        // Handle image upload
+            $extfile = $request->image->getClientOriginalName();
+            $namaFile = 'web-' . time() . "." . $extfile;
+
+            $path = $request->image->move('gbrStarterCode', $namaFile);
+            $path = str_replace("\\", "//", $path);
+            $imagePath = asset('gbrStarterCode/' . $namaFile);
+
+            $user = UserModel::find($id);
+
 
         UserModel::find($id)->update([
             'username' => $request->username,
             'nama' => $request->nama,
             'password' => $request->password ? bcrypt($request->password) : UserModel::find($id)->password,
-            'level_id' => $request->level_id
+            'level_id' => $request->level_id,
+            'image' => $imagePath,
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil diubah');
     }
 
-    // untuk mengahpus data user
-    public function destroy(string $id)
+
+    public function destroy(String $id)
     {
-        $check = UserModel::find($id);
-        if (!$check) {
+        // untuk mengahpus data user
+        $user = UserModel::find($id);
+        if (!$user) {
             return redirect('/user')->with('error', 'Data user tidak ditemukan');
         }
         try {
-            UserModel::destroy($id); // Hapus data level
+            // Delete the image if exists
+            if ($user->image) {
+                Storage::delete('public/' . $user->image);
+            }
+            $user->delete();
             return redirect('/user')->with('success', 'Data user berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
             return redirect('/user')->with('error', 'Data user gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
